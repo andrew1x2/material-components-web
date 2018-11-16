@@ -48,7 +48,7 @@ const SAUCE_LAUNCHERS = {
   },
 };
 
-const customLaunchers = Object.assign({}, HEADLESS_LAUNCHERS, USING_SL ? SAUCE_LAUNCHERS : {});
+const customLaunchers = Object.assign({}, USING_SL ? SAUCE_LAUNCHERS : {}, HEADLESS_LAUNCHERS);
 const browsers = USING_TRAVISCI ? Object.keys(customLaunchers) : ['Chrome'];
 
 module.exports = function(config) {
