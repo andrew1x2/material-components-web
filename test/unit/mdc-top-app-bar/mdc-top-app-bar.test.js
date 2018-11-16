@@ -290,11 +290,14 @@ test('adapter#getViewportScrollY returns scroll distance', () => {
   assert.equal(component.getDefaultFoundation().adapter_.getViewportScrollY(), window.pageYOffset);
 });
 
-test('adapter#getViewportScrollY returns scroll distance when scrollTarget_ is not window', () => {
+test('adapter#getViewportScrollY returns scroll distance when scrollTarget_ is not window', (done) => {
   const {component, fixture} = setupTest();
   const content = fixture.querySelector('.content');
-  component.scrollTarget_ = content;
-  assert.equal(component.getDefaultFoundation().adapter_.getViewportScrollY(), content.scrollTop);
+  component.setScrollTarget(content);
+  requestAnimationFrame(() => {
+    assert.equal(component.getDefaultFoundation().adapter_.getViewportScrollY(), content.scrollTop);
+    done();
+  });
 });
 
 test('adapter#getTotalActionItems returns the number of action items on the opposite side of the menu', () => {
